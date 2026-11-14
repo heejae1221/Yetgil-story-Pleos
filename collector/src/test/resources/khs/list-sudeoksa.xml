@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+<result>
+<totalCnt>9</totalCnt>
+<pageUnit>3</pageUnit>
+<pageIndex>1</pageIndex>	
+
+<item>
+<sn>1</sn>
+<no>254</no>
+<ccmaName><![CDATA[국보]]></ccmaName>
+<ccbaMnm1><![CDATA[예산 수덕사 대웅전]]></ccbaMnm1>
+<ccbaMnm2><![CDATA[禮山 修德寺 大雄殿]]></ccbaMnm2>
+<ccbaCtcdNm><![CDATA[충남]]></ccbaCtcdNm>
+<ccsiName><![CDATA[예산군]]></ccsiName>
+<ccbaAdmin><![CDATA[수덕사]]></ccbaAdmin>
+<ccbaKdcd>11</ccbaKdcd>
+<ccbaCtcd>34</ccbaCtcd>
+<ccbaAsno>0000490000000</ccbaAsno>
+<ccbaCncl>N</ccbaCncl>
+<ccbaCpno>1113400490000</ccbaCpno>
+<longitude>126.622672726278</longitude>
+<latitude>36.6632845477709</latitude>
+<regDt>2026-01-23 14:55:05</regDt>
+
+</item>
+
+<item>
+<sn>2</sn>
+<no>1767</no>
+<ccmaName><![CDATA[보물]]></ccmaName>
+<ccbaMnm1><![CDATA[수덕사 노사나불 괘불탱]]></ccbaMnm1>
+<ccbaMnm2><![CDATA[修德寺 盧舍那佛 掛佛幀]]></ccbaMnm2>
+<ccbaCtcdNm><![CDATA[충남]]></ccbaCtcdNm>
+<ccsiName><![CDATA[예산군]]></ccsiName>
+<ccbaAdmin><![CDATA[수덕사]]></ccbaAdmin>
+<ccbaKdcd>12</ccbaKdcd>
+<ccbaCtcd>34</ccbaCtcd>
+<ccbaAsno>0012630000000</ccbaAsno>
+<ccbaCncl>N</ccbaCncl>
+<ccbaCpno>1123412630000</ccbaCpno>
+<longitude>126.6208122</longitude>
+<latitude>36.6631975</latitude>
+<regDt>2026-05-06 21:55:02</regDt>
+
+</item>
+
+<item>
+<sn>3</sn>
+<no>1774</no>
+<ccmaName><![CDATA[보물]]></ccmaName>
+<ccbaMnm1><![CDATA[예산 수덕사 목조석가여래삼불좌상 및 복장유물]]></ccbaMnm1>
+<ccbaMnm2><![CDATA[禮山 修德寺 木造釋迦如來三佛坐像 및 腹藏遺物]]></ccbaMnm2>
+<ccbaCtcdNm><![CDATA[충남]]></ccbaCtcdNm>
+<ccsiName><![CDATA[예산군]]></ccsiName>
+<ccbaAdmin><![CDATA[수덕사]]></ccbaAdmin>
+<ccbaKdcd>12</ccbaKdcd>
+<ccbaCtcd>34</ccbaCtcd>
+<ccbaAsno>0013810000000</ccbaAsno>
+<ccbaCncl>N</ccbaCncl>
+<ccbaCpno>1123413810000</ccbaCpno>
+<longitude>126.6208122</longitude>
+<latitude>36.6631975</latitude>
+<regDt>2025-06-26 18:46:12</regDt>
+
+</item>
+	
+</result>

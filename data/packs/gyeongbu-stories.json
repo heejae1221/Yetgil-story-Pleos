@@ -1,0 +1,360 @@
+{
+  "$schema": "../../docs/schema/story-pack.schema.json",
+  "schemaVersion": 1,
+  "packId": "gyeongbu-stories",
+  "region": "경부고속도로 (시연 경로 핵심 장소)",
+  "updatedAt": "2026-11-11",
+  "places": [
+    {
+      "id": "doksanseong-semadae",
+      "name": "독산성 세마대",
+      "location": {
+        "lat": 37.18361,
+        "lon": 127.01944
+      },
+      "kind": "fortress",
+      "triggerRadiusM": 6500,
+      "curriculumTopics": [
+        "임진왜란"
+      ],
+      "episodes": [
+        {
+          "id": "doksanseong-semadae-1",
+          "number": 1,
+          "title": "흰쌀로 말을 씻긴 권율 장군",
+          "category": "folklore",
+          "minAudience": "child",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "임진왜란 때 독산성에는 물이 넉넉하지 않았대요. 그런데 권율 장군이 산꼭대기에 흰 말을 세우고, 물 대신 흰쌀을 끼얹어 말을 씻기는 척했다고 전해져요. 멀리서 보던 왜군은 성 안에 물이 넘친다고 여기고 물러났대요. 그래서 이곳을 말을 씻긴 곳, 세마대라고 불러요.",
+              "durationSec": 21
+            },
+            "long": {
+              "text": "오산의 독산성은 낮은 산 위에 쌓은 성이에요. 성은 튼튼했지만 큰 약점이 하나 있었어요. 성 안에 물이 넉넉하지 않았던 거예요. 임진왜란 때 권율 장군이 군사들과 이 성에 머물렀을 때, 장군은 이 약점을 감추려고 꾀를 냈대요. 왜군이 잘 보이는 산꼭대기에 흰 말을 끌어올리고, 물 대신 흰쌀을 말 위에 끼얹으며 씻기는 척했대요. 멀리서 보면 하얀 쌀이 쏟아지는 모습이 꼭 물처럼 보였겠죠. 왜군은 성 안에 말을 씻길 만큼 물이 많다고 여기고 물러났다고 전해져요. 그래서 이 자리를 말을 씻긴 대, 세마대라고 불러요. 이 이야기는 전해 내려오는 이야기예요. 물이 부족한 것이 이 성의 큰 약점이었기 때문에 이런 이야기가 생겼다고 해요. 기록에 남은 일도 있어요. 1592년 12월, 권율 장군은 전라도에서 병사 약 2만 명을 이끌고 올라와 이 성에 머물렀어요. 그리고 성을 지켜 내며 왜군의 길을 막았대요.",
+              "durationSec": 63
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 독산성",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/독산성",
+              "license": "other",
+              "modifiable": false
+            }
+          ],
+          "quiz": {
+            "question": "권율 장군은 물 대신 무엇을 끼얹어서 말을 씻기는 척했을까요?",
+            "answers": [
+              "흰쌀",
+              "쌀",
+              "하얀 쌀"
+            ],
+            "explanation": "멀리서 보면 흰쌀이 물처럼 보였대요."
+          },
+          "seriesIds": [
+            "imjin-war"
+          ]
+        },
+        {
+          "id": "doksanseong-semadae-2",
+          "number": 2,
+          "title": "흰쌀 이야기와 실제 기록",
+          "category": "legend_vs_record",
+          "minAudience": "teen",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "기록에 따르면 1592년 12월, 권율 장군은 전라도에서 군사를 이끌고 올라와 독산성에 머물며 왜군의 길을 막았어요. 흰쌀로 말을 씻겼다는 이야기는 기록이 아니라 전해 내려오는 이야기예요. 성 안에 물이 모자란 것이 이 성의 큰 약점이었기 때문에, 그 약점을 꾀로 이겨 냈다는 이야기가 생겼다고 봐요.",
+              "durationSec": 25
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 독산성",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/독산성",
+              "license": "other",
+              "modifiable": false
+            }
+          ],
+          "seriesIds": [
+            "imjin-war"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cheonan-samgeori",
+      "name": "천안삼거리",
+      "location": {
+        "lat": 36.783966,
+        "lon": 127.164506
+      },
+      "kind": "village",
+      "triggerRadiusM": 4500,
+      "curriculumTopics": [
+        "우리 지역의 문화유산"
+      ],
+      "episodes": [
+        {
+          "id": "cheonan-samgeori-1",
+          "number": 1,
+          "title": "길이 세 갈래로 나뉘던 곳",
+          "category": "name_origin",
+          "minAudience": "child",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "천안삼거리는 옛날 큰길이 세 갈래로 나뉘던 곳이에요. 북쪽으로 가면 한양, 남쪽으로 가면 대구와 경주가 있는 경상도, 서쪽으로 가면 공주를 지나 전라도로 이어졌대요. 그래서 전국을 오가는 나그네들이 이곳에서 길을 골라 떠났어요.",
+              "durationSec": 19
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 천안삼거리",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/천안삼거리",
+              "license": "other",
+              "modifiable": false
+            }
+          ],
+          "quiz": {
+            "question": "천안삼거리에서 옛길은 몇 갈래로 나뉘었을까요?",
+            "answers": [
+              "세 갈래",
+              "세갈래",
+              "셋",
+              "3",
+              "세 개"
+            ],
+            "explanation": "북쪽은 한양, 남쪽은 경상도, 서쪽은 전라도로 나뉘었어요."
+          }
+        },
+        {
+          "id": "cheonan-samgeori-2",
+          "number": 2,
+          "title": "능수버들과 능소 이야기",
+          "category": "folklore",
+          "minAudience": "teen",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "천안삼거리는 능수버들이 아름답기로 이름났대요. 이곳에는 능소라는 여인과 박 선비의 사랑 이야기가 전해 내려와요. 이 이야기는 노래와 연극, 영화로도 여러 번 만들어졌고, 지금도 천안에서는 해마다 가을에 흥타령 축제를 열어요.",
+              "durationSec": 19
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 천안삼거리",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/천안삼거리",
+              "license": "other",
+              "modifiable": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chupungnyeong",
+      "name": "추풍령",
+      "location": {
+        "lat": 36.2066667,
+        "lon": 128.005
+      },
+      "kind": "mountain_pass",
+      "triggerRadiusM": 3000,
+      "episodes": [
+        {
+          "id": "chupungnyeong-1",
+          "number": 1,
+          "title": "백두대간에서 가장 낮은 고개",
+          "category": "record",
+          "minAudience": "child",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "추풍령은 충청북도 영동과 경상북도 김천 사이의 고개예요. 높이가 해발 221미터로, 백두대간에서 가장 낮은 곳이래요. 그래서 경부선 철도와 경부고속도로가 모두 이 고개를 넘어요. 추풍령휴게소는 경부고속도로에서 처음 생긴 휴게소예요.",
+              "durationSec": 20
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 추풍령",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/추풍령",
+              "license": "other",
+              "modifiable": false
+            }
+          ],
+          "quiz": {
+            "question": "추풍령휴게소는 경부고속도로의 몇 번째 휴게소일까요?",
+            "answers": [
+              "첫 번째",
+              "첫번째",
+              "처음",
+              "첫째",
+              "1"
+            ],
+            "explanation": "추풍령휴게소가 경부고속도로 최초의 휴게소예요."
+          }
+        },
+        {
+          "id": "chupungnyeong-2",
+          "number": 2,
+          "title": "고개 하나로 달라지는 날씨와 말씨",
+          "category": "record",
+          "minAudience": "teen",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "아주 옛날 추풍령은 신라와 백제의 국경이 되기도 했대요. 지금도 이 고개를 경계로 날씨와 말씨, 풍속이 꽤 다르다고 해요. 이곳은 계절마다 날씨 변화가 심하고 하늘에는 난기류가 자주 생긴대요. 고개에는 높은 하늘의 날씨를 재는 기상 관측소도 있어요.",
+              "durationSec": 20
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 추풍령",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/추풍령",
+              "license": "other",
+              "modifiable": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jikjisa",
+      "name": "직지사",
+      "location": {
+        "lat": 36.11639,
+        "lon": 128.00444
+      },
+      "kind": "temple",
+      "triggerRadiusM": 8000,
+      "curriculumTopics": [
+        "임진왜란"
+      ],
+      "episodes": [
+        {
+          "id": "jikjisa-1",
+          "number": 1,
+          "title": "손가락으로 가리킨 절터",
+          "category": "name_origin",
+          "minAudience": "child",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "직지사는 신라 때인 418년, 아도화상이 세웠다고 전해지는 아주 오래된 절이에요. 아도화상이 멀리 선산의 도리사에서 손가락으로 황악산을 가리키며, 저기에도 좋은 절터가 있다고 했대요. 그래서 곧게 가리킨다는 뜻의 직지라는 이름이 붙었다고 해요.",
+              "durationSec": 21
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 직지사",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/직지사",
+              "license": "other",
+              "modifiable": false
+            }
+          ],
+          "quiz": {
+            "question": "아도화상은 무엇으로 황악산을 가리켰을까요?",
+            "answers": [
+              "손가락",
+              "손"
+            ],
+            "explanation": "손가락으로 곧게 가리켜서 직지사래요."
+          }
+        },
+        {
+          "id": "jikjisa-2",
+          "number": 2,
+          "title": "이름에 얽힌 두 이야기와 사명대사",
+          "category": "legend_vs_record",
+          "minAudience": "teen",
+          "reviewed": true,
+          "scripts": {
+            "short": {
+              "text": "직지사라는 이름에는 다른 이야기도 있어요. 고려 때 능여대사가 절을 다시 지으면서 자를 쓰지 않고 손으로 재어 지었기 때문이라는 거예요. 이 절은 사명대사가 출가한 곳이기도 해요. 사명대사는 서른 살에 직지사 주지가 되었고, 임진왜란 때 승병을 이끌었어요.",
+              "durationSec": 21
+            }
+          },
+          "sources": [
+            {
+              "title": "옛길 이야기 원고 (위 자료를 바탕으로 직접 씀)",
+              "publisher": "옛길 이야기",
+              "license": "original",
+              "modifiable": true
+            },
+            {
+              "title": "위키백과: 직지사",
+              "publisher": "위키백과",
+              "url": "https://ko.wikipedia.org/wiki/직지사",
+              "license": "other",
+              "modifiable": false
+            }
+          ],
+          "seriesIds": [
+            "imjin-war"
+          ]
+        }
+      ]
+    }
+  ],
+  "series": [
+    {
+      "id": "imjin-war",
+      "name": "임진왜란",
+      "placeIds": [
+        "doksanseong-semadae",
+        "jikjisa"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- lucide "route" 아이콘 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp" android:viewportWidth="32" android:viewportHeight="32">
+    <path android:fillColor="#212124" android:pathData="M6,0h20a6,6 0 0 1 6,6v20a6,6 0 0 1 -6,6h-20a6,6 0 0 1 -6,-6v-20a6,6 0 0 1 6,-6z"/>
+    <group android:translateX="4" android:translateY="4">
+        <path android:strokeColor="#F4F4F6" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round"
+            android:pathData="M6,19m-3,0a3,3 0 1 0 6,0a3,3 0 1 0 -6,0"/>
+        <path android:strokeColor="#3D8BFF" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round"
+            android:pathData="M9,19h8.5a3.5,3.5 0 0 0 0,-7h-11a3.5,3.5 0 0 1 0,-7H15"/>
+        <path android:strokeColor="#F4F4F6" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round"
+            android:pathData="M18,5m-3,0a3,3 0 1 0 6,0a3,3 0 1 0 -6,0"/>
+    </group>
+</vector>

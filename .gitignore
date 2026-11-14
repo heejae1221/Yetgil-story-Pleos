@@ -1,0 +1,41 @@
+# Gradle / Android
+.gradle/
+build/
+bin/
+local.properties
+*.apk
+*.aab
+captures/
+.externalNativeBuild/
+.cxx/
+
+# IDE
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Secrets
+.env
+*.keystore
+*.jks
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Video (hyperframes)
+video/node_modules/
+video/renders/
+video/.hyperframes/
+
+# 공모전 제출용 release APK 는 올린다 (apk/팀명_앱이름_release.apk)
+!apk/*.apk
+
+# 접수양식·동의서 (개인정보 포함) - 절대 커밋하지 않는다
+*.docx
+*.hwp
+*.hwpx
+submission/

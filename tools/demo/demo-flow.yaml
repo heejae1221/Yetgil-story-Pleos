@@ -1,0 +1,61 @@
+# 시연 영상 자동 녹화용 Maestro 흐름 (https://maestro.dev)
+#   maestro record --local tools/demo/demo-flow.yaml      → 흐름을 실행하며 MP4 로 녹화 (내 PC 에서 렌더)
+#   maestro test tools/demo/demo-flow.yaml                → 녹화 없이 흐름만 실행
+# 전제: Pleos Connect 에뮬레이터가 켜져 있고 내비 지도가 다 뜬 뒤, 앱이 설치되어 있다 (adb install -r -g apk/...apk).
+# 버튼은 좌표가 아니라 화면 글자로 누른다. 목소리(Gleo TTS)까지 담으려면 scrcpy 녹화를 함께 쓴다 (docs/HANDOFF.md).
+# ※ 아직 실행해 보지 않은 초안이다. 처음 한 번은 maestro test 로 확인한다.
+appId: app.yetgil.story
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "시연 주행.*"
+    timeout: 90000
+
+# 1. 출발 → 이번 길 미리보기
+- tapOn: "출발"
+- extendedWaitUntil:
+    visible: "다음 이야기"
+    timeout: 30000
+- tapOn: "이번 길"
+- extendedWaitUntil:
+    visible: "이번 길에서 들을 이야기.*"
+    timeout: 30000
+- swipe:
+    direction: UP
+    duration: 1500
+- tapOn: "지금 이야기"
+
+# 2. 다섯 번째 장소(독산성 세마대)까지 건너뛰기 → 예고 → 이야기 → 퀴즈 (시연 주행 중에는 4초 뒤 자동 정답)
+- repeat:
+    times: 5
+    commands:
+      - tapOn: "다음 장소 앞으로"
+- extendedWaitUntil:
+    visible: "독산성 세마대"
+    timeout: 120000
+- extendedWaitUntil:
+    visible: "퀴즈"
+    timeout: 180000
+- extendedWaitUntil:
+    visible: ".*정답.*"
+    timeout: 60000
+
+# 3. 다음 장소(천안삼거리) 이야기
+- tapOn: "다음 장소 앞으로"
+- extendedWaitUntil:
+    visible: "천안삼거리"
+    timeout: 120000
+- extendedWaitUntil:
+    visible: "다시 듣기"
+    timeout: 120000
+
+# 4. 정차·충전 → 긴 이야기 (근처에 정차용 원고가 있는 곳에서 보인다)
+- tapOn: "정차·충전 \\(P\\)"
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# 5. 도감
+- tapOn: "도감"
+- waitForAnimationToEnd:
+    timeout: 5000

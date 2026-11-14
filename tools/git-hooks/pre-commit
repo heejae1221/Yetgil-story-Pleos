@@ -1,0 +1,36 @@
+#!/bin/sh
+# 비밀 정보가 커밋되지 않게 막는다. 켜기: git config core.hooksPath tools/git-hooks
+# - local.properties / .env 파일 자체를 막는다
+# - local.properties 와 환경 변수에 있는 실제 키 값이 바뀐 내용에 들어 있으면 막는다
+# - serviceKey= 뒤에 값이 붙은 줄을 막는다 (테스트용 가짜 값 'TEST' 는 허용)
+
+fail() {
+  echo "[pre-commit] 커밋을 막았습니다: $1" >&2
+  echo "[pre-commit] 키는 local.properties(커밋 안 됨)나 환경 변수에만 두세요." >&2
+  exit 1
+}
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+echo "$staged" | grep -E '(^|/)(local\.properties|\.env(\..*)?)$' >/dev/null && fail "local.properties 또는 .env 파일이 커밋 목록에 있습니다"
+
+added=$(git diff --cached -U0 --diff-filter=ACMR | grep '^+' | grep -v '^+++')
+
+keys=""
+if [ -f local.properties ]; then
+  keys=$(grep -E '^(dataGoKr\.serviceKey|pleos\.clientId|pleos\.clientSecret)=' local.properties | cut -d= -f2- | tr -d '\r')
+fi
+[ -n "$DATA_GO_KR_SERVICE_KEY" ] && keys="$keys
+$DATA_GO_KR_SERVICE_KEY"
+
+echo "$keys" | while IFS= read -r k; do
+  [ ${#k} -lt 8 ] && continue
+  case "$k" in 발급받은_일반_인증키) continue ;; esac
+  if printf '%s' "$added" | grep -F -q -- "$k"; then
+    echo "[pre-commit] 실제 키 값이 바뀐 내용에 들어 있습니다" >&2
+    exit 1
+  fi
+done || fail "키 값 노출"
+
+printf '%s' "$added" | grep -E -i 'serviceKey=[A-Za-z0-9%+/=]{16,}' | grep -v 'serviceKey=TEST' >/dev/null && fail "serviceKey= 뒤에 실제 값처럼 보이는 문자열이 있습니다"
+
+exit 0

@@ -1,0 +1,10 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["data/packs/*.json"],
+      "url": "./docs/schema/story-pack.schema.json"
+    }
+  ],
+  "files.encoding": "utf8",
+  "java.configuration.updateBuildConfiguration": "interactive"
+}

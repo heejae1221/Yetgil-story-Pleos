@@ -1,0 +1,271 @@
+{
+    "year": 2027,
+    "source": "한국천문연구원 특일 정보 (공공데이터포털)",
+    "updatedAt": "2026-11-14",
+    "days": [
+        {
+            "date": "2027-01-01",
+            "name": "1월1일",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-01-05",
+            "name": "소한",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-01-20",
+            "name": "대한",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-02-04",
+            "name": "입춘",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-02-06",
+            "name": "설날",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-02-07",
+            "name": "설날",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-02-08",
+            "name": "설날",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-02-09",
+            "name": "대체공휴일(설날)",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-02-19",
+            "name": "우수",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-03-01",
+            "name": "삼일절",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-03-06",
+            "name": "경칩",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-03-21",
+            "name": "춘분",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-04-05",
+            "name": "청명",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-04-20",
+            "name": "곡우",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-05-01",
+            "name": "노동절",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-05-03",
+            "name": "대체공휴일(노동절)",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-05-05",
+            "name": "어린이날",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-05-06",
+            "name": "입하",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-05-13",
+            "name": "부처님오신날",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-05-21",
+            "name": "소만",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-06-06",
+            "name": "현충일",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-06-06",
+            "name": "망종",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-06-21",
+            "name": "하지",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-07-07",
+            "name": "소서",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-07-17",
+            "name": "제헌절",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-07-19",
+            "name": "대체공휴일(제헌절)",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-07-23",
+            "name": "대서",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-08-08",
+            "name": "입추",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-08-15",
+            "name": "광복절",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-08-16",
+            "name": "대체공휴일(광복절)",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-08-23",
+            "name": "처서",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-09-08",
+            "name": "백로",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-09-14",
+            "name": "추석",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-09-15",
+            "name": "추석",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-09-16",
+            "name": "추석",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-09-23",
+            "name": "추분",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-10-03",
+            "name": "개천절",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-10-04",
+            "name": "대체공휴일(개천절)",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-10-08",
+            "name": "한로",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-10-09",
+            "name": "한글날",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-10-11",
+            "name": "대체공휴일(한글날)",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-10-24",
+            "name": "상강",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-11-08",
+            "name": "입동",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-11-22",
+            "name": "소설",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-12-07",
+            "name": "대설",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-12-22",
+            "name": "동지",
+            "kind": "solar_term"
+        },
+        {
+            "date": "2027-12-25",
+            "name": "기독탄신일",
+            "kind": "holiday",
+            "isHoliday": true
+        },
+        {
+            "date": "2027-12-27",
+            "name": "대체공휴일(기독탄신일)",
+            "kind": "holiday",
+            "isHoliday": true
+        }
+    ]
+}

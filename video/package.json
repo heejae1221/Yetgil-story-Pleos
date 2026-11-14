@@ -1,0 +1,20 @@
+{
+  "name": "yetgil-demo-video",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "check": "node tools/hf.mjs check",
+    "snapshot": "node tools/hf.mjs snapshot",
+    "render": "node tools/hf.mjs render -o renders/yetgil-demo-draft.mp4",
+    "hf": "node tools/hf.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "hyperframes": "0.9.3"
+  },
+  "private": true
+}

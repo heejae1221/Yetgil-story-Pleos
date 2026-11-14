@@ -1,0 +1,158 @@
+<!doctype html>
+<!-- 이 파일을 고친 뒤 `npm run build` 로 index.html 을 다시 만든다. index.html 을 직접 고치지 않는다. -->
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <!-- 시안과 같은 디자인 토큰 (build.mjs 가 docs/design/tokens.css 를 넣는다) -->
+    <style>
+/*UI_TOKENS*/
+    </style>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+        color: var(--ui-text-1);
+        font-family: var(--ui-font);
+        letter-spacing: -0.01em;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+      .scene-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        text-align: center;
+        word-break: keep-all;
+      }
+      .eyebrow {
+        font-size: 28px;
+        font-weight: 500;
+        color: var(--ui-text-3);
+      }
+      .display {
+        font-size: 150px;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+      }
+      .tagline {
+        font-size: 44px;
+        font-weight: 500;
+        color: var(--ui-text-2);
+      }
+      .statement {
+        font-size: 60px;
+        font-weight: 600;
+        line-height: 1.45;
+        letter-spacing: -0.025em;
+        max-width: 1600px;
+      }
+      .note {
+        margin-top: 40px;
+        font-size: 26px;
+        color: var(--ui-text-3);
+      }
+      .label {
+        position: absolute;
+        left: 96px;
+        top: 56px;
+        font-size: 32px;
+        font-weight: 600;
+        color: var(--ui-text-2);
+      }
+      /* 시안 1440×600 → 1.2배 = 1728×720 */
+      .frame {
+        position: absolute;
+        left: 96px;
+        top: 130px;
+        width: 1728px;
+        height: 720px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 0 2px var(--ui-line-strong), 0 24px 64px rgba(0, 0, 0, 0.5);
+      }
+      .screen {
+        width: 1440px;
+        height: 600px;
+        transform: scale(1.2);
+        transform-origin: 0 0;
+      }
+      .caption {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 900px;
+        font-size: 38px;
+        line-height: 1.45;
+        font-weight: 500;
+        text-align: center;
+        color: var(--ui-text-1);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__TOTAL__"
+      data-width="1920"
+      data-height="1080"
+    >
+    <!--SCENES-->
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const times = /*SCENE_TIMES*/[];
+      times.forEach(([start, dur], i) => {
+        const el = document.getElementById("s" + i);
+        const frame = el.querySelector(".frame");
+        const caption = el.querySelector(".caption");
+        // 첫 장면은 0초부터 보이게 둔다 (첫 프레임이 썸네일이 된다)
+        if (i > 0) tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, start);
+        if (frame) {
+          tl.fromTo(frame, { scale: 0.98, y: 12 }, { scale: 1, y: 0, duration: 0.7, ease: "power3.out" }, start);
+          // 오래 머무는 화면이 멈춰 보이지 않게 아주 천천히 다가간다
+          tl.to(frame, { scale: 1.02, duration: dur - 1.1, ease: "none" }, start + 0.7);
+        } else {
+          const lines = el.children;
+          if (i > 0) {
+            tl.fromTo(lines, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.4, ease: "power2.out" }, start);
+          }
+          tl.to(lines, { y: -10, duration: dur - 2, ease: "none" }, start + 1.6);
+        }
+        if (caption) {
+          tl.fromTo(caption, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, start + 0.4);
+        }
+        tl.to(el, { opacity: 0, duration: 0.4, ease: "power1.in" }, start + dur - 0.4);
+      });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

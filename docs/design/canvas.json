@@ -1,0 +1,31 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-10-22T06:20:00Z" },
+  "title": "옛길 이야기 차량 화면 시안",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 1440, "h": 600, "title": "① 주행 중 · 이야기 들려주는 중" },
+    "NavWidget.dc.html": { "x": 1520, "y": 0, "w": 1440, "h": 600, "title": "② 내비 위 미니 카드" },
+    "RoutePreview.dc.html": { "x": 3040, "y": 0, "w": 1440, "h": 600, "title": "③ 목적지 설정 시 · 이번 길 미리보기" },
+    "Quiz.dc.html": { "x": 0, "y": 980, "w": 1440, "h": 600, "title": "④ 가족 퀴즈" },
+    "Parked.dc.html": { "x": 1520, "y": 980, "w": 1440, "h": 600, "title": "⑤ 정차·충전 중 · 긴 이야기" },
+    "Collection.dc.html": { "x": 0, "y": 1960, "w": 1440, "h": 600, "title": "⑥ 이야기 도감 · 부모 리포트" },
+    "Settings.dc.html": { "x": 1520, "y": 1960, "w": 1440, "h": 600, "title": "⑦ 설정" }
+  },
+  "order": [
+    "Main.dc.html",
+    "NavWidget.dc.html",
+    "RoutePreview.dc.html",
+    "Quiz.dc.html",
+    "Parked.dc.html",
+    "Collection.dc.html",
+    "Settings.dc.html"
+  ],
+  "notes": {
+    "rowDrive": { "x": 0, "y": -300, "text": "달리는 중 — 눈은 길에, 이야기는 귀로", "kind": "title1", "maxW": 4480 },
+    "rowFamily": { "x": 0, "y": 680, "text": "가족과 함께 · 세워뒀을 때", "kind": "title1", "maxW": 2960 },
+    "rowRecord": { "x": 0, "y": 1660, "text": "기록과 설정", "kind": "title1", "maxW": 2960 }
+  },
+  "designSystems": []
+}

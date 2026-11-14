@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yetgil.app/schema/story-pack.schema.json",
+  "title": "옛길 이야기 꾸러미",
+  "description": "지역별 이야기 꾸러미. engine/src/main/kotlin/app/yetgil/engine/model/StoryPack.kt 와 같은 구조. 길이·출처 규칙은 StoryPackValidator 가 추가로 확인한다.",
+  "type": "object",
+  "required": ["schemaVersion", "packId", "region", "updatedAt", "places"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "packId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "region": { "type": "string" },
+    "updatedAt": { "type": "string", "format": "date" },
+    "places": { "type": "array", "items": { "$ref": "#/$defs/place" } },
+    "series": { "type": "array", "items": { "$ref": "#/$defs/series" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "place": {
+      "type": "object",
+      "required": ["id", "name", "location", "kind", "episodes"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "location": {
+          "type": "object",
+          "required": ["lat", "lon"],
+          "properties": {
+            "lat": { "type": "number", "minimum": 33, "maximum": 39 },
+            "lon": { "type": "number", "minimum": 124, "maximum": 132 }
+          }
+        },
+        "kind": {
+          "enum": ["fortress", "temple", "royal_tomb", "mountain_pass", "hot_spring", "river", "village", "monument", "other"]
+        },
+        "triggerRadiusM": { "type": "integer", "minimum": 1, "default": 3000, "description": "경로가 이 거리(m) 안으로 지나가면 지나간다고 본다" },
+        "episodes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/episode" } },
+        "curriculumTopics": { "type": "array", "items": { "type": "string" } },
+        "imageUrl": { "type": "string" },
+        "imageCredit": { "type": "string" }
+      }
+    },
+    "episode": {
+      "type": "object",
+      "required": ["id", "number", "title", "category", "minAudience", "scripts", "sources"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "number": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string" },
+        "category": {
+          "enum": ["record", "name_origin", "folklore", "legend_vs_record"],
+          "description": "record=기록으로 남은 이야기, name_origin=이름 유래, folklore=전해 내려오는 이야기, legend_vs_record=전설과 기록"
+        },
+        "minAudience": { "enum": ["child", "teen", "adult"], "description": "들려줘도 되는 가장 어린 청취자" },
+        "reviewed": { "type": "boolean", "default": false, "description": "사람이 검수했는지. 아이와 함께 모드는 검수된 편만" },
+        "scripts": {
+          "type": "object",
+          "required": ["short"],
+          "properties": {
+            "short": { "$ref": "#/$defs/script", "description": "주행 중 약 25초 (15~40초)" },
+            "long": { "$ref": "#/$defs/script", "description": "주행 중 약 90초 (60~120초)" },
+            "parked": { "$ref": "#/$defs/script", "description": "정차·충전 중 약 4분 (150~300초)" }
+          }
+        },
+        "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/source" } },
+        "quiz": { "$ref": "#/$defs/quiz" },
+        "seriesIds": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "script": {
+      "type": "object",
+      "required": ["text", "durationSec"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "durationSec": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["title", "publisher", "license", "modifiable"],
+      "properties": {
+        "title": { "type": "string" },
+        "publisher": { "type": "string" },
+        "url": { "type": "string" },
+        "license": {
+          "enum": ["kogl_1", "kogl_2", "kogl_3", "kogl_4", "cc_by", "original", "other"],
+          "description": "kogl_3·kogl_4 는 변경금지 → modifiable=false"
+        },
+        "modifiable": { "type": "boolean", "description": "false 면 AI 각색 없이 원문 그대로 읽는다" }
+      }
+    },
+    "quiz": {
+      "type": "object",
+      "required": ["question", "answers", "explanation"],
+      "properties": {
+        "question": { "type": "string", "minLength": 1 },
+        "answers": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "explanation": { "type": "string" }
+      }
+    },
+    "series": {
+      "type": "object",
+      "required": ["id", "name", "placeIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "placeIds": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+      }
+    }
+  }
+}

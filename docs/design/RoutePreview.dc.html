@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>이번 길 미리보기</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+body{margin:0}
+/* ui-tokens:start · docs/design/tokens.css 에서 복사됨. 여기 말고 tokens.css 를 고친 뒤 sync-tokens.mjs 실행 */
+/* 옛길 이야기 디자인 토큰 · 공통 컴포넌트
+ * Pleos Connect 공개 자료(현대차그룹 소개 글, 공개 화면)를 참고한 방향이며, 현대차 내부 디자인 시스템을 옮긴 것이 아니다.
+ * - 뉴트럴 블랙·그레이 표면, 강조색은 하나(상태·진행·주요 버튼에만)
+ * - 산세리프 한 벌, 굵기와 크기로만 위계
+ * - 작은 반경, 그림자 대신 면 차이와 1px 구분선
+ * - 큰 터치 영역(주 버튼 72px, 보조 56px 이상)
+ * - 면(패널)은 화면마다 중심 정보에만. 보조 정보는 배경 없이 구분선으로 (카드 속 카드 금지)
+ * - 아이콘은 lucide (24 격자, 선 2px, 둥근 끝)
+ * - 반경은 shadcn/ui 처럼 --ui-radius 하나에서 계산
+ *
+ * 고친 뒤: node docs/design/sync-tokens.mjs (시안 7종의 <helmet> 에 복사) → cd video && npm run build
+ */
+:root {
+  /* 색 · 바탕 */
+  --ui-bg: #000000; /* 차량 OLED 기준 순수 검정 */
+  --ui-surface-1: #161618;
+  --ui-surface-2: #212124;
+  --ui-surface-3: #2c2c30;
+  --ui-line: #26262a;
+  --ui-line-strong: #3a3a40;
+  --ui-scrim: rgba(0, 0, 0, 0.82);
+  /* 색 · 글자 */
+  --ui-text-1: #f4f4f6;
+  --ui-text-2: #a9a9b0;
+  --ui-text-3: #707078;
+  /* 색 · 의미 (강조색은 시안마다 --ui-accent 로 바꿀 수 있다) */
+  --ui-accent: #3d8bff;
+  --ui-on-accent: #ffffff;
+  --ui-positive: #38c39a;
+  --ui-map-bg: #141416;
+  --ui-map-road: #222226;
+  --ui-map-casing: #2c2c31;
+  --ui-map-route: #3d8bff;
+
+  /* 서체 */
+  --ui-font: "Pretendard Variable", Pretendard, "Noto Sans KR", system-ui, sans-serif;
+  --ui-fs-display: 64px;
+  --ui-fs-title-1: 44px;
+  --ui-fs-title-2: 32px;
+  --ui-fs-title-3: 24px;
+  --ui-fs-body-lg: 22px;
+  --ui-fs-body: 20px;
+  --ui-fs-caption: 17px;
+
+  /* 간격 · 반경 · 크기 */
+  --ui-sp-1: 4px;
+  --ui-sp-2: 8px;
+  --ui-sp-3: 12px;
+  --ui-sp-4: 16px;
+  --ui-sp-5: 24px;
+  --ui-sp-6: 32px;
+  --ui-radius: 12px;
+  --ui-r-sm: calc(var(--ui-radius) - 4px);
+  --ui-r-md: var(--ui-radius);
+  --ui-r-lg: calc(var(--ui-radius) + 4px);
+  --ui-h-lg: 72px;
+  --ui-h-md: 56px;
+  --ui-h-chip: 36px;
+  --ui-appbar-h: 72px;
+
+  /* 움직임: 짧고 조용하게 */
+  --ui-ease: cubic-bezier(0.2, 0, 0, 1);
+  --ui-dur: 160ms;
+}
+
+/* 화면 틀 (Pleos 앱 화면 영역 1440×600) */
+.ui-root {
+  --ui-accent-weak: color-mix(in srgb, var(--ui-accent) 16%, transparent);
+  --ui-accent-mid: color-mix(in srgb, var(--ui-accent) 36%, transparent);
+  --ui-positive-weak: color-mix(in srgb, var(--ui-positive) 16%, transparent);
+  --ui-ring: var(--ui-accent);
+  width: 1440px;
+  height: 600px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--ui-bg);
+  color: var(--ui-text-1);
+  font-family: var(--ui-font);
+  font-size: var(--ui-fs-body);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  display: flex;
+  flex-direction: column;
+}
+.ui-root *,
+.ui-root *::before,
+.ui-root *::after {
+  box-sizing: border-box;
+}
+.ui-root :where(h1, h2, h3, p, ol, ul, fieldset, legend) {
+  margin: 0;
+  padding: 0;
+}
+.ui-root :where(ol, ul) {
+  list-style: none;
+}
+.ui-root fieldset {
+  border: none;
+  min-width: 0;
+}
+.ui-legend {
+  float: left;
+  width: 100%;
+  font-size: var(--ui-fs-title-3);
+  font-weight: 700;
+}
+.ui-root a {
+  color: var(--ui-accent);
+}
+.ui-root svg {
+  flex-shrink: 0;
+}
+.ui-body {
+  flex: 1;
+  min-height: 0;
+  padding: var(--ui-sp-5) var(--ui-sp-6) var(--ui-sp-6);
+  display: grid;
+  gap: var(--ui-sp-5);
+}
+
+/* 앱 바: 앱 이름 · 탭 · 상태 */
+.ui-appbar {
+  height: var(--ui-appbar-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--ui-sp-5);
+  padding: 0 var(--ui-sp-6);
+  border-bottom: 1px solid var(--ui-line);
+}
+.ui-appbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-sp-3);
+  font-size: var(--ui-fs-title-3);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ui-appbar__mark {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ui-r-md);
+  background: var(--ui-surface-2);
+  color: var(--ui-text-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ui-tabs {
+  display: flex;
+  align-self: stretch;
+  gap: var(--ui-sp-2);
+  margin-left: var(--ui-sp-3);
+}
+.ui-tab {
+  position: relative;
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--ui-sp-4);
+  font-size: var(--ui-fs-body);
+  font-weight: 500;
+  color: var(--ui-text-3);
+  white-space: nowrap;
+}
+.ui-tab.is-active {
+  color: var(--ui-text-1);
+  font-weight: 700;
+}
+.ui-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: var(--ui-sp-4);
+  right: var(--ui-sp-4);
+  bottom: -1px;
+  height: 3px;
+  border-radius: 2px 2px 0 0;
+  background: var(--ui-accent);
+}
+.ui-appbar__status {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--ui-sp-4);
+  font-size: var(--ui-fs-body);
+  color: var(--ui-text-2);
+  white-space: nowrap;
+}
+
+/* 면 */
+.ui-panel {
+  background: var(--ui-surface-1);
+  border-radius: var(--ui-r-lg);
+  padding: var(--ui-sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-sp-4);
+  min-width: 0;
+}
+.ui-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-sp-2);
+  padding: var(--ui-sp-4) 0;
+  border-bottom: 1px solid var(--ui-line);
+}
+.ui-section:first-child {
+  padding-top: 0;
+}
+.ui-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* 배경 없는 보조 열: 왼쪽 구분선 하나로 나눈다 */
+.ui-rail {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--ui-sp-1) 0 var(--ui-sp-1) var(--ui-sp-5);
+  border-left: 1px solid var(--ui-line);
+}
+
+/* 숫자 하나 + 설명 */
+.ui-stat {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ui-sp-2);
+  white-space: nowrap;
+}
+.ui-stat__value {
+  font-size: var(--ui-fs-title-2);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.ui-stat__unit {
+  font-size: var(--ui-fs-body);
+  color: var(--ui-text-2);
+}
+
+/* 글자 */
+.ui-h2 {
+  font-size: var(--ui-fs-body);
+  font-weight: 700;
+  color: var(--ui-text-2);
+  line-height: 1.3;
+}
+.ui-display {
+  font-size: var(--ui-fs-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.ui-title-1 {
+  font-size: var(--ui-fs-title-1);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+.ui-title-2 {
+  font-size: var(--ui-fs-title-2);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.ui-title-3 {
+  font-size: var(--ui-fs-title-3);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.ui-body-lg {
+  font-size: var(--ui-fs-body-lg);
+}
+.ui-label {
+  font-size: var(--ui-fs-caption);
+  font-weight: 500;
+  color: var(--ui-text-3);
+}
+.ui-caption {
+  font-size: var(--ui-fs-caption);
+  color: var(--ui-text-2);
+}
+.ui-muted {
+  color: var(--ui-text-2);
+}
+.ui-faint {
+  color: var(--ui-text-3);
+}
+.ui-accent-text {
+  color: var(--ui-accent);
+}
+.ui-positive-text {
+  color: var(--ui-positive);
+}
+.ui-num {
+  font-variant-numeric: tabular-nums;
+}
+.ui-placeholder {
+  color: var(--ui-text-3);
+}
+
+/* 버튼 */
+.ui-btn {
+  height: var(--ui-h-lg);
+  padding: 0 var(--ui-sp-5);
+  border: none;
+  border-radius: var(--ui-r-md);
+  background: var(--ui-surface-2);
+  color: var(--ui-text-1);
+  font: 600 var(--ui-fs-body-lg) / 1 var(--ui-font);
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-sp-3);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--ui-dur) var(--ui-ease), transform var(--ui-dur) var(--ui-ease);
+}
+.ui-btn:hover {
+  background: var(--ui-surface-3);
+}
+.ui-btn:active {
+  transform: scale(0.98);
+}
+.ui-btn:focus-visible {
+  outline: 2px solid var(--ui-ring);
+  outline-offset: 2px;
+}
+.ui-btn--primary {
+  background: var(--ui-accent);
+  color: var(--ui-on-accent);
+}
+.ui-btn--primary:hover {
+  background: color-mix(in srgb, var(--ui-accent) 88%, white);
+}
+.ui-btn--tonal {
+  background: var(--ui-accent-weak);
+  color: var(--ui-accent);
+}
+.ui-btn--tonal:hover {
+  background: var(--ui-accent-mid);
+}
+.ui-btn--outline {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--ui-line-strong);
+}
+.ui-btn--outline:hover {
+  background: var(--ui-surface-2);
+}
+.ui-btn--ghost {
+  background: transparent;
+  color: var(--ui-text-2);
+}
+.ui-btn--ghost:hover {
+  background: var(--ui-surface-2);
+  color: var(--ui-text-1);
+}
+.ui-btn--md {
+  height: var(--ui-h-md);
+  font-size: var(--ui-fs-body);
+}
+.ui-btn--icon {
+  width: var(--ui-h-lg);
+  padding: 0;
+}
+.ui-btn--icon.ui-btn--md {
+  width: var(--ui-h-md);
+}
+
+/* 칩 · 점 */
+.ui-chip {
+  height: var(--ui-h-chip);
+  padding: 0 var(--ui-sp-3);
+  border-radius: var(--ui-r-sm);
+  background: var(--ui-surface-2);
+  color: var(--ui-text-1);
+  font-size: var(--ui-fs-caption);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-sp-2);
+  white-space: nowrap;
+}
+.ui-chip--accent {
+  background: var(--ui-accent-weak);
+  color: var(--ui-accent);
+  font-weight: 700;
+}
+.ui-chip--positive {
+  background: var(--ui-positive-weak);
+  color: var(--ui-positive);
+  font-weight: 700;
+}
+.ui-chip--solid {
+  background: var(--ui-accent);
+  color: var(--ui-on-accent);
+  font-weight: 700;
+}
+.ui-chip--line {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--ui-line-strong);
+  color: var(--ui-text-2);
+}
+.ui-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ui-accent);
+  flex-shrink: 0;
+}
+.ui-dot--positive {
+  background: var(--ui-positive);
+}
+.ui-dot--empty {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--ui-text-3);
+}
+
+/* 아이콘 타일 (방향 등) */
+.ui-icon-tile {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--ui-r-lg);
+  background: var(--ui-surface-2);
+  color: var(--ui-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ui-icon-tile--sm {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--ui-r-md);
+}
+
+/* 진행 막대: 채움 = 들은 만큼, 창 = 이야기 끝, 표시선 = 지나가는 곳 */
+.ui-progress {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--ui-surface-3);
+}
+.ui-progress--thin {
+  height: 6px;
+  border-radius: 3px;
+}
+.ui-progress__window,
+.ui-progress__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
+}
+.ui-progress__window {
+  background: var(--ui-accent-mid);
+}
+.ui-progress__fill {
+  background: var(--ui-accent);
+}
+.ui-progress__marker {
+  position: absolute;
+  right: -1px;
+  top: -8px;
+  bottom: -8px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--ui-text-1);
+}
+
+/* 목록 줄 */
+.ui-row {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  gap: var(--ui-sp-4);
+  border-bottom: 1px solid var(--ui-line);
+  cursor: pointer;
+}
+.ui-row:last-child {
+  border-bottom: none;
+}
+.ui-row__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* 고르는 칸 (라디오) */
+.ui-option {
+  position: relative;
+  border-radius: var(--ui-r-md);
+  background: var(--ui-surface-2);
+  box-shadow: inset 0 0 0 2px transparent;
+  padding: var(--ui-sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-sp-1);
+  cursor: pointer;
+  transition: background-color var(--ui-dur) var(--ui-ease), box-shadow var(--ui-dur) var(--ui-ease);
+}
+.ui-option:has(input:checked),
+.ui-option.is-selected {
+  background: var(--ui-accent-weak);
+  box-shadow: inset 0 0 0 2px var(--ui-accent);
+}
+.ui-option__head {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-sp-3);
+  font-size: var(--ui-fs-body-lg);
+  font-weight: 700;
+}
+.ui-option--center {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-sp-3);
+  height: var(--ui-h-lg);
+  padding: 0 var(--ui-sp-4);
+  font-size: var(--ui-fs-body-lg);
+}
+
+/* 라디오 · 스위치: 기본 입력을 그대로 쓰고 모양만 바꾼다 */
+.ui-radio {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--ui-text-3);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.ui-radio:checked {
+  box-shadow: inset 0 0 0 7px var(--ui-accent);
+  background: var(--ui-on-accent);
+}
+.ui-switch {
+  appearance: none;
+  position: relative;
+  width: 64px;
+  height: 36px;
+  margin: 0;
+  border-radius: 18px;
+  background: var(--ui-surface-3);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color var(--ui-dur) var(--ui-ease);
+}
+.ui-switch::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ui-text-2);
+  transition: transform var(--ui-dur) var(--ui-ease), background-color var(--ui-dur) var(--ui-ease);
+}
+.ui-switch:checked {
+  background: var(--ui-accent);
+}
+.ui-switch:checked::after {
+  transform: translateX(28px);
+  background: var(--ui-on-accent);
+}
+.ui-radio:focus-visible,
+.ui-switch:focus-visible {
+  outline: 2px solid var(--ui-ring);
+  outline-offset: 3px;
+}
+
+/* 지도 위에 뜨는 카드 */
+.ui-overlay {
+  position: absolute;
+  background: var(--ui-surface-1);
+  border: 1px solid var(--ui-line-strong);
+  border-radius: var(--ui-r-lg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.ui-map-tag {
+  position: absolute;
+  padding: var(--ui-sp-2) var(--ui-sp-3);
+  border-radius: var(--ui-r-sm);
+  background: var(--ui-scrim);
+  font-size: var(--ui-fs-caption);
+  font-weight: 600;
+}
+
+/* 도감 도장 */
+.ui-stamp {
+  min-height: 56px;
+  border-radius: var(--ui-r-sm);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--ui-line-strong);
+  color: var(--ui-text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--ui-sp-1) 6px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+.ui-stamp.is-heard {
+  background: var(--ui-accent-weak);
+  box-shadow: inset 0 0 0 1px var(--ui-accent);
+  color: var(--ui-text-1);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-root * {
+    transition: none !important;
+  }
+}
+/* ui-tokens:end */
+</style>
+</helmet>
+<div class="ui-root" style="--ui-accent: {{accent}}">
+
+  <header class="ui-appbar">
+    <div class="ui-appbar__brand">
+      <span class="ui-appbar__mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"></circle><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path><circle cx="18" cy="5" r="3"></circle></svg></span>
+      옛길 이야기
+    </div>
+    <nav class="ui-tabs" aria-label="옛길 이야기 메뉴">
+      <button type="button" class="ui-tab">지금 이야기</button>
+      <button type="button" class="ui-tab is-active" aria-current="page">이번 길</button>
+      <button type="button" class="ui-tab">도감</button>
+      <button type="button" class="ui-tab">설정</button>
+    </nav>
+    <div class="ui-appbar__status">
+      <span class="ui-chip ui-chip--accent">새 이야기 6곳</span>
+      <span class="ui-chip ui-chip--positive">복습 퀴즈 1곳</span>
+    </div>
+  </header>
+
+  <div class="ui-body" style="display: flex; flex-direction: column; gap: 28px; padding-bottom: 28px">
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 class="ui-title-1">이번 길에서 들을 이야기 7곳</h1>
+      <span class="ui-muted">서울에서 부산까지 경부고속도로. 예시 경로라 거리는 대략이에요.</span>
+    </div>
+
+    <div style="position: relative; height: 40px; margin: 0 16px" role="img" aria-label="경로 위 이야기 위치: 독산성 세마대, 안성, 천안삼거리, 추풍령, 직지사, 통도사, 금정산 금샘">
+      <div style="position: absolute; left: 0; right: 0; top: 18px; height: 4px; border-radius: 2px; background: var(--ui-surface-3)"></div>
+      <div style="position: absolute; left: -8px; top: 12px; width: 16px; height: 16px; border-radius: 50%; background: var(--ui-text-1)"></div>
+      <div style="position: absolute; right: -10px; top: 10px; width: 20px; height: 20px; border-radius: 4px; background: var(--ui-text-1)"></div>
+      <div class="ui-num" style="position: absolute; left: calc(10% - 16px); top: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--ui-bg); box-shadow: inset 0 0 0 3px var(--ui-positive); color: var(--ui-positive); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">1</div>
+      <div class="ui-num" style="position: absolute; left: calc(17.5% - 16px); top: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--ui-accent); color: var(--ui-on-accent); box-shadow: 0 0 0 3px var(--ui-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">2</div>
+      <div class="ui-num" style="position: absolute; left: calc(21% - 16px); top: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--ui-accent); color: var(--ui-on-accent); box-shadow: 0 0 0 3px var(--ui-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">3</div>
+      <div class="ui-num" style="position: absolute; left: calc(54% - 16px); top: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--ui-accent); color: var(--ui-on-accent); box-shadow: 0 0 0 3px var(--ui-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">4</div>
+      <div class="ui-num" style="position: absolute; left: calc(57.5% - 16px); top: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--ui-accent); color: var(--ui-on-accent); box-shadow: 0 0 0 3px var(--ui-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">5</div>
+      <div class="ui-num" style="position: absolute; left: calc(92.5% - 16px); top: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--ui-accent); color: var(--ui-on-accent); box-shadow: 0 0 0 3px var(--ui-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">6</div>
+      <div class="ui-num" style="position: absolute; left: calc(97.5% - 16px); top: 4px; width: 32px; height: 32px; border-radius: 50%; background: var(--ui-accent); color: var(--ui-on-accent); box-shadow: 0 0 0 3px var(--ui-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">7</div>
+    </div>
+
+    <ol style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px">
+      <li style="border-top: 2px solid var(--ui-positive); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span class="ui-caption ui-positive-text ui-num" style="font-weight: 700; display: flex; gap: 10px"><span>1</span><span>약 40km</span></span>
+        <span class="ui-title-3" style="font-size: 27px">독산성 세마대</span>
+        <span class="ui-caption" style="font-size: 18px">작년에 다 들었어요</span>
+        <span class="ui-caption ui-faint">복습 퀴즈로 물어봐요</span>
+      </li>
+      <li style="border-top: 2px solid var(--ui-accent); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span class="ui-caption ui-accent-text ui-num" style="font-weight: 700; display: flex; gap: 10px"><span>2</span><span>약 70km</span></span>
+        <span class="ui-title-3" style="font-size: 27px">안성</span>
+        <span class="ui-caption" style="font-size: 18px">새 이야기 2편</span>
+        <span class="ui-caption ui-faint">이름 유래</span>
+      </li>
+      <li style="border-top: 2px solid var(--ui-accent); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span class="ui-caption ui-accent-text ui-num" style="font-weight: 700; display: flex; gap: 10px"><span>3</span><span>약 85km</span></span>
+        <span class="ui-title-3" style="font-size: 27px">천안삼거리</span>
+        <span class="ui-caption" style="font-size: 18px">새 이야기 1편</span>
+        <span class="ui-caption ui-faint">전설</span>
+      </li>
+      <li style="border-top: 2px solid var(--ui-accent); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span class="ui-caption ui-accent-text ui-num" style="font-weight: 700; display: flex; gap: 10px"><span>4</span><span>약 215km</span></span>
+        <span class="ui-title-3" style="font-size: 27px">추풍령</span>
+        <span class="ui-caption" style="font-size: 18px">새 이야기 1편</span>
+        <span class="ui-caption ui-faint">이름 유래</span>
+      </li>
+      <li style="border-top: 2px solid var(--ui-accent); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span class="ui-caption ui-accent-text ui-num" style="font-weight: 700; display: flex; gap: 10px"><span>5</span><span>약 230km</span></span>
+        <span class="ui-title-3" style="font-size: 27px">직지사</span>
+        <span class="ui-caption" style="font-size: 18px">새 이야기 1편</span>
+        <span class="ui-caption ui-faint">이름 유래</span>
+      </li>
+      <li style="border-top: 2px solid var(--ui-accent); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span class="ui-caption ui-accent-text ui-num" style="font-weight: 700; display: flex; gap: 10px"><span>6</span><span>약 370km</span></span>
+        <span class="ui-title-3" style="font-size: 27px">통도사</span>
+        <span class="ui-caption" style="font-size: 18px">새 이야기 3편</span>
+        <span class="ui-caption ui-faint">전설과 기록</span>
+      </li>
+      <li style="border-top: 2px solid var(--ui-accent); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span class="ui-caption ui-accent-text ui-num" style="font-weight: 700; display: flex; gap: 10px"><span>7</span><span>약 390km</span></span>
+        <span class="ui-title-3" style="font-size: 27px">금정산 금샘</span>
+        <span class="ui-caption" style="font-size: 18px">새 이야기 2편</span>
+        <span class="ui-caption ui-faint">전설과 과학</span>
+      </li>
+    </ol>
+
+    <div style="display: flex; align-items: center; gap: 12px; margin-top: auto">
+      <span class="ui-muted">이 길로 모을 수 있는 시리즈</span>
+      <span class="ui-chip ui-chip--line" style="color: var(--ui-text-1)">임진왜란</span>
+      <span class="ui-chip ui-chip--line" style="color: var(--ui-text-1)">옛길과 과거 시험</span>
+      <span style="flex-grow: 1"></span>
+      <button type="button" class="ui-btn ui-btn--outline">빼고 싶은 곳 고르기</button>
+      <button type="button" class="ui-btn ui-btn--primary">출발하면 지나갈 때마다 들려드려요</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#3D8BFF","options":["#3D8BFF","#38C39A","#A98BFF","#F2A25C"]},"$preview":{"width":1440,"height":600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#3D8BFF' };
+  }
+}
+</script>
+</body>
+</html>
