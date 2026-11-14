@@ -2,8 +2,7 @@
 #   maestro record --local tools/demo/demo-flow.yaml      → 흐름을 실행하며 MP4 로 녹화 (내 PC 에서 렌더)
 #   maestro test tools/demo/demo-flow.yaml                → 녹화 없이 흐름만 실행
 # 전제: Pleos Connect 에뮬레이터가 켜져 있고 내비 지도가 다 뜬 뒤, 앱이 설치되어 있다 (adb install -r -g apk/...apk).
-# 버튼은 좌표가 아니라 화면 글자로 누른다. 목소리(Gleo TTS)까지 담으려면 scrcpy 녹화를 함께 쓴다 (docs/HANDOFF.md).
-# ※ 아직 실행해 보지 않은 초안이다. 처음 한 번은 maestro test 로 확인한다.
+# 버튼은 좌표가 아니라 화면 글자로 누른다. 목소리(Gleo TTS)까지 담으려면 scrcpy 녹화를 함께 쓴다.
 appId: app.yetgil.story
 ---
 - launchApp:

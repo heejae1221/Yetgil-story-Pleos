@@ -1,4 +1,4 @@
-# 시연 영상 초안 (hyperframes)
+# 시연 영상 (hyperframes)
 
 `docs/design` 의 화면 시안 7종을 이어 붙인 약 2분 12초(1920×1080, 30fps) 영상. 소리 없음.
 
@@ -22,9 +22,3 @@ npm run build     # 시안 → index.html
 npm run check     # 검사 (오류 0개여야 함)
 npm run render    # renders/yetgil-demo-draft.mp4
 ```
-
-## 남은 일
-
-- 실제 Pleos Connect 에뮬레이터 가상 주행 화면으로 장면 바꾸기 (기획서 Q7)
-- 내레이션·배경음 (지금은 무음)
-- 화면 시안을 고치면 `npm run build` 후 다시 렌더
