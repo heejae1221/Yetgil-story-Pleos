@@ -204,6 +204,7 @@ class DriveController(app: Application) : AndroidViewModel(app) {
             return
         }
         lastSkipAlong = next.second.alongM
+        session.clearNarrationGap()
         demoAlong = (next.second.alongM - demoSpeedMps * DEMO_LEAD_SEC).coerceAtLeast(0.0)
         if (!demoRunning) startDemo()
         showToast("${next.first.name} 앞으로 이동")

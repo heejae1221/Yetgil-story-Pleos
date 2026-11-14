@@ -132,6 +132,11 @@ class DriveSession(
     private var lastStory: Pair<Place, String>? = null
     private var utteranceSeq = 0
 
+    /** 시연 주행의 '다음 장소 앞으로': 사용자가 바로 다음 장소를 듣겠다고 했으므로 이야기 사이 최소 간격을 따지지 않는다 */
+    fun clearNarrationGap() {
+        lastEndedAt = null
+    }
+
     /** 목적지를 넣거나 바꾸면 경로, 목적지를 지우면 null */
     fun onRoute(route: Route?) {
         navRoute = route

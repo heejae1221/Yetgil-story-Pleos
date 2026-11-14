@@ -97,6 +97,23 @@ class DriveSessionTest {
     }
 
     @Test
+    fun `시연에서 다음 장소로 건너뛰면 이야기 사이 간격을 기다리지 않는다`() {
+        val next = place("독산성", pointBeside(9_000.0, 500.0))
+        val rare = StorySettings(frequency = Frequency.RARE)
+        val waited = Car(session(sudeoksa, next, settings = rare)).apply { answer = "몰라요" }
+        waited.run(400)
+        assertEquals(1, waited.spoken().count { "잠시 후" in it.second.text }, "15분 간격이라 독산성은 건너뛴다")
+
+        val skipped = Car(session(sudeoksa, next, settings = rare)).apply { answer = "몰라요" }
+        skipped.run(200)
+        skipped.session.clearNarrationGap()
+        skipped.run(200)
+        val stories = skipped.spoken().map { it.second.text }.filter { "잠시 후" in it }
+        assertEquals(2, stories.size, stories.toString())
+        assertTrue(stories[1].startsWith("잠시 후 오른쪽으로 독산성을"), stories[1])
+    }
+
+    @Test
     fun `그만이라고 하면 멈추고 그 편은 다시 나오지 않는다`() {
         val car = Car(session(sudeoksa))
         car.run(70)

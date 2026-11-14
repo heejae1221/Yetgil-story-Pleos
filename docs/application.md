@@ -80,7 +80,7 @@ Pleos Connect SDK(Android Automotive OS 기반)와 Kotlin, Jetpack Compose로 �
 ## 7. 참고자료
 
 - GitHub 저장소: https://github.com/heejae1221/Yetgil-story-Pleos (소스, 단위 테스트, 이야기 데이터, 수집 도구, apk/ 폴더의 release APK. 실행 방법은 README)
-- 시연 영상: [영상 링크] (Pleos Connect v2.1.0 에뮬레이터에서 실행한 앱 화면)
+- 시연 영상: https://github.com/heejae1221/Yetgil-story-Pleos/blob/main/docs/demo/yetgil-story-demo.mp4 (Pleos Connect v2.1.0 에뮬레이터에서 실행한 앱 화면, 3분 8초, 기능별 설명 자막)
 - 앱 화면: 저장소의 docs/design/preview/ (에뮬레이터 실제 화면 emulator-*.png, 화면 시안 7종 overview.png)
 
 ## 8. 숏폼 링크
@@ -91,6 +91,5 @@ Pleos Connect SDK(Android Automotive OS 기반)와 Kotlin, Jetpack Compose로 �
 
 ## 제출 전 확인 (양식에 넣지 않음)
 
-- 7번의 [영상 링크] 채우기 (GitHub 저장소 주소는 반영함)
 - 출처 자료: 기획 배경의 국가유산 1만 8천 건(국가유산청), 추석 이동 3,093만 명·승용차 88.4%(정부 합동 특별교통대책), 2030년 2,000만 대(겟차 공모전 소개 글). 심사에서 물으면 docs/proposal.md 의 출처 목록을 보여 준다.
 - 저장소·영상·이미지에 실명·개인 이메일이 보이지 않는지 (커밋 작성자 정보 포함)
